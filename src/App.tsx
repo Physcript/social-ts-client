@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import routes from './route'
+import reducer from './context/auth/reducer';
 import './App.css';
 
+import { AuthContextProvider } from './context/auth/context';
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
+import { DUserContext } from './interface/context/context';
 
 function App() {
+  
+
+  const [ userState,userDispatch ] = useReducer(reducer, DUserContext)
+  const UserContextValue = {
+    userState,
+    userDispatch
+  }
+
+
   return (
+    <AuthContextProvider value = { UserContextValue }>
     <BrowserRouter>
       <Routes>
         {
@@ -17,6 +30,7 @@ function App() {
         } 
       </Routes>
     </BrowserRouter>
+    </AuthContextProvider>
   );
 }
 

@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
+import AuthContext from '../context/auth/context'
 import  request  from '../module/request'
 
 export interface ILogin {
@@ -10,6 +11,9 @@ export interface ILogin {
 export interface ILogin {}
 
 const LoginComponent = () => {
+
+  const UserContext = useContext(AuthContext)
+
   const [ loading, setLoading ] = useState<boolean>(false)
   const [ error,setError ] = useState<any>('')
   const [ loginInput, setLoginInput ] = useState<ILogin>({
@@ -30,7 +34,8 @@ const LoginComponent = () => {
         if(val.status === 200)
           {
             val.json().then((res: any) => {
-              console.log(res)
+              const { user, token } = res.message
+              UserContext.userDispatch({ TYPE: 'LOGIN', PAYLOAD: { USER: user, TOKEN: token } })
             })
           }
         else
