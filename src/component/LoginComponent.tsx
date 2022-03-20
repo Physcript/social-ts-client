@@ -3,6 +3,8 @@ import React, { useState,useContext } from 'react'
 import AuthContext from '../context/auth/context'
 import  request  from '../module/request'
 
+import { useNavigate } from 'react-router-dom'
+
 export interface ILogin {
   email: string,
   password: string
@@ -13,6 +15,7 @@ export interface ILogin {}
 const LoginComponent = () => {
 
   const UserContext = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const [ loading, setLoading ] = useState<boolean>(false)
   const [ error,setError ] = useState<any>('')
@@ -36,12 +39,14 @@ const LoginComponent = () => {
             val.json().then((res: any) => {
               const { user, token } = res.message
               UserContext.userDispatch({ TYPE: 'LOGIN', PAYLOAD: { USER: user, TOKEN: token } })
+              navigate('/home')            
             })
           }
         else
           {
             val.json().then((res: any) => {
-              console.log(res)
+              const error = res.error
+              setError(error)
             })
           }
       })
@@ -64,7 +69,8 @@ const LoginComponent = () => {
 
   return (
     <div>
-      <div>
+      <div style = {{ display: 'flex', flexDirection: 'column' }}>
+        { error ? ( <label className = ''>{ error }</label> ) : '' }
         <label>Login</label>
         <section>
           <input

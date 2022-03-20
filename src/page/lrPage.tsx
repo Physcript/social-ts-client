@@ -1,4 +1,5 @@
 import LoginComponent from "../component/LoginComponent"
+import RegisterComponent from "../component/RegisterComponent"
 
 
 export interface ILRPage {} 
@@ -13,7 +14,7 @@ const lrPage = () => {
       )
     }
   return (
-    <div>Register</div>
+    <RegisterComponent />
   )
 }
 
