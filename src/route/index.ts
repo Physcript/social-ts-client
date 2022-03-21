@@ -1,5 +1,6 @@
 
 import IRoute from '../interface/route'
+import HomePage from '../page/homePage'
 import lrPage from '../page/lrPage'
 import mainPage from '../page/mainPage'
 
@@ -8,6 +9,11 @@ const mainRoute: IRoute[]  = [
     path: '/',
     element: mainPage,
     auth: false
+  },
+  {
+    path: 'home',
+    element: HomePage,
+    auth: true
   }
 ]
 

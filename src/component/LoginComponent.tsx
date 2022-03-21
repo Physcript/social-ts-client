@@ -38,6 +38,7 @@ const LoginComponent = () => {
           {
             val.json().then((res: any) => {
               const { user, token } = res.message
+              localStorage.setItem('token', token)
               UserContext.userDispatch({ TYPE: 'LOGIN', PAYLOAD: { USER: user, TOKEN: token } })
               navigate('/home')            
             })

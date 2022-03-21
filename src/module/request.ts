@@ -24,10 +24,10 @@ const request = (props: IRequest) => {
       }
     else
       {
-        request = new Request(props.url, 
+        request = new Request(`http://localhost:1337/api${props.url}`, 
           {
             method: props.method,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json', 'token': `${localStorage.getItem('token')}` }
           })
       }
   
