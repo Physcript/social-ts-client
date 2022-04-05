@@ -1,5 +1,6 @@
 import React, { useState,useContext } from 'react'
 import request from '../module/request'
+import { useNavigate } from 'react-router-dom'
 
 interface IRegisterComponent {}
 interface IUserInput {
@@ -20,6 +21,8 @@ interface IError {
 }
 
 const RegisterComponent: React.FC<IRegisterComponent> = ( props ) => {
+    
+  const navigate = useNavigate()
 
   const [ loading,setLoading ] = useState<boolean>(false)
   const [ error,setError ] = useState([])
@@ -153,6 +156,7 @@ const RegisterComponent: React.FC<IRegisterComponent> = ( props ) => {
         </section>
         <section>
           <button onClick = { registerHandler }>Register</button>
+          <button onClick = { () => navigate('/') }>Home</button>
         </section> 
       </div>
     </div>

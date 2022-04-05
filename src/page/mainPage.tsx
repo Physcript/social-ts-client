@@ -49,7 +49,15 @@ const MainPage = () => {
   },[])
 
   return (
-    <div>Main page</div>
+    <div style = {{ display: 'flex', flexDirection: 'column', width: '150px' }}>
+      Main page
+      <button
+        onClick = { () => navigate('/login') }
+      >Login</button>
+      <button
+        onClick = { () => navigate('/register') }
+      >Register</button>
+    </div>
   )
 }
 

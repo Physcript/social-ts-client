@@ -89,6 +89,7 @@ const LoginComponent = () => {
         </section>
         <section>
           <button onClick = { loginHandler }>Login</button>
+          <button onClick = { () => navigate('/') }>Home</button>
         </section>
       </div>
     </div>

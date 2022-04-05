@@ -16,6 +16,7 @@ const lrPage = () => {
   return (
     <RegisterComponent />
   )
+  
 }
 
 export default lrPage

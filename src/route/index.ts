@@ -3,6 +3,7 @@ import IRoute from '../interface/route'
 import HomePage from '../page/homePage'
 import lrPage from '../page/lrPage'
 import mainPage from '../page/mainPage'
+import ProfilePage from '../page/ProfilePage'
 
 const mainRoute: IRoute[]  = [
   {
@@ -14,6 +15,11 @@ const mainRoute: IRoute[]  = [
     path: 'home',
     element: HomePage,
     auth: true
+  },
+  {
+    path: 'user/:uid',
+    element: ProfilePage,
+    auth: false
   }
 ]
 
