@@ -11,47 +11,9 @@ const HomePage: React.FC<IHomePage> = (props) => {
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
   const { _id,firstName,lastName,avatar,uid,email,createdAt,updatedAt, address }  = authContext.userState.USER
-
   
-  const logoutHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    const url = '/logout'
-    const method = 'POST'
-    const body = JSON.stringify({
-      "uid": authContext.userState.USER.uid
-    })
-    const _request = request({ url,method,body })
-    
-    fetch(_request)
-      .then((val) => {
-  
-          if(val.status === 200)
-            {
-              val.json().then((res) => {
-                localStorage.setItem('token', '')
-                authContext.userDispatch({ TYPE: 'LOGOUT' , PAYLOAD: { } }) 
-                navigate('/')
-              })
-            }
-          else
-            {
-              val.json().then((res) => {
-                  console.log(res)
-                })
-            }
-      })
-
-
-    return
-  }
-
   return (
     <div>
-      <div>
-        <button
-          onClick = { logoutHandler }
-        >Logout</button>
-      </div>
       Home
       <CreatePostComponent _id = { _id } firstName = { firstName } 
         lastName = { lastName }

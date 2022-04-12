@@ -41,7 +41,7 @@ const AllPostComponent: React.FC<IAllPostComponent> = (props) => {
             return (
               <SinglePost key = { index } body = { post.body } avatar = { post.avatar }
                 uid = { post.userUid } createdAt = { post.createdAt } updatedAt = { post.updatedAt }
-                firstName = { post.firstName } lastName = { post.lastName }
+                firstName = { post.firstName } lastName = { post.lastName } _id = { post._id }
               /> 
             )
           }) 

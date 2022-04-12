@@ -7,6 +7,7 @@ import { AuthContextProvider } from './context/auth/context';
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import { DUserContext } from './interface/context/context';
 import ProtectedRoute from './component/ProtectedComponent';
+import HeaderComponent from './component/HeaderComponent';
 
 function App() {
   
@@ -21,6 +22,7 @@ function App() {
   return (
     <AuthContextProvider value = { UserContextValue }>
     <BrowserRouter>
+      <HeaderComponent />
       <Routes>
         {
           routes.map((route,index) => {
