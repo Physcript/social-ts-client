@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import request from '../module/request'
 import { IPost } from '../interface/post'
-
+import socket from '../module/socket'
 import SinglePost from './SinglePost'
 
 interface IAllPostComponent {}
@@ -30,7 +30,24 @@ const AllPostComponent: React.FC<IAllPostComponent> = (props) => {
             })
           }
       })
-
+  socket.on('refresh-post', () => {
+    fetch(_request) 
+      .then((val) => {
+        if(val.status === 200)
+          {
+            val.json().then((res) => {
+              setPost(res.message.post)
+            })
+          }
+        else
+          {
+            val.json().then((res) => {
+                console.log(res)
+            })
+          }
+      })  
+  })
+  
   }, [])
 
   return (
@@ -42,6 +59,7 @@ const AllPostComponent: React.FC<IAllPostComponent> = (props) => {
               <SinglePost key = { index } body = { post.body } avatar = { post.avatar }
                 uid = { post.userUid } createdAt = { post.createdAt } updatedAt = { post.updatedAt }
                 firstName = { post.firstName } lastName = { post.lastName } _id = { post._id }
+                countLikes = { post.countLikes }
               /> 
             )
           }) 

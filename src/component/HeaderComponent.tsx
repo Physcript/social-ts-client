@@ -45,13 +45,23 @@ const HeaderComponent: React.FC<IHeaderComponent> = (props) => {
   const profileHandler = () => {
     navigate(`/user/${ userContext.userState.USER.uid }`) 
   }
+  const loginHandler = () => {
+    navigate('/login')     
+  }
+  const registerHandler = () => {
+    navigate('/register')
+  }
 
   return (
     
     <div className = 'contkainer'>
       <nav style = {{ 'display': 'flex', justifyContent: 'space-between' }}>
         <div>
-          <a href = '#'>SocialLink</a>
+          <label 
+            onClick = { 
+              () => navigate('/home')
+            }
+          >SocialLink</label>
         </div> 
         <div> 
           { userContext.userState.STATUS == true 
@@ -64,8 +74,9 @@ const HeaderComponent: React.FC<IHeaderComponent> = (props) => {
               )
             :
               (
-                <div>
-                  not authorized
+                <div style = {{ display: 'flex','gap': '10px' }}>
+                  <label onClick = { registerHandler }>Register</label>
+                  <label onClick = { loginHandler }>Login</label>
                 </div>
               )
           }

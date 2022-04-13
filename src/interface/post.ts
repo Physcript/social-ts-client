@@ -7,6 +7,7 @@ export interface IPost {
   lastName: string,
   body: string,
   avatar: string,
+  countLikes: number,
   userUid: string,
   createdAt: string,
   updatedAt: string

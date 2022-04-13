@@ -37,12 +37,6 @@ const ProfilePage: React.FC<IProfilePage> = (props) => {
 
   return (
     <div> 
-      <div>
-        <label>Test</label>
-        <button
-          onClick = { () => navigate('/') }
-        >Home</button>
-      </div>
       <section>
         <div style = {{ width: '200px' }}>
           <img src = { profile.avatar } style = {{ width: '100%' }}/>  

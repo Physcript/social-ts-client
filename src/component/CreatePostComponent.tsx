@@ -2,6 +2,7 @@
 import React,{ useState } from 'react'
 import IUser from '../interface/user'
 import request from '../module/request'
+import socket from '../module/socket'
 
 export interface ICreatePostComponent extends IUser {} 
 
@@ -23,6 +24,7 @@ const CreatePostComponent = (props: ICreatePostComponent) =>{
           {
             val.json().then((res) => {
               console.log(res)
+              socket.emit('refresh-post')
             })
           }
         else
