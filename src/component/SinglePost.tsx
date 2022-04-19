@@ -2,6 +2,7 @@
 import React, { useState,useEffect } from 'react'
 import request from '../module/request'
 import { useNavigate } from 'react-router-dom'
+import CommentComponent from './CommentComponent'
 
 export interface ISinglePost {
   _id: string
@@ -10,13 +11,16 @@ export interface ISinglePost {
   firstName: string
   lastName: string
   uid: string
+  userId: string
   countLikes: number
   createdAt: string
   updatedAt: string
 }
 
 const SinglePost: React.FC<ISinglePost> = (post) => {
-  const [ likeCount, setLikeCount ] = useState<number>(0)
+  const [ likeCount, setLikeCount ] = useState<number>(post.countLikes ?? 0)
+  const [ show,setShow ] = useState<boolean>(false)
+
   const navigate = useNavigate() 
   const likeHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -24,7 +28,7 @@ const SinglePost: React.FC<ISinglePost> = (post) => {
     const url = '/like/comment'
     const method = 'POST'
     const body = JSON.stringify({
-      uid: post.uid,
+      uid: post.userId,
       postId: post._id
     })
     
@@ -46,6 +50,20 @@ const SinglePost: React.FC<ISinglePost> = (post) => {
       })
   }
 
+  const showHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    if(show === false)
+      {
+        setShow(true)
+      }
+    else
+      {
+        setShow(false)
+      }
+    return
+  }
+
+
   useEffect(() => {
     console.log('effect')  
   },[])
@@ -60,10 +78,12 @@ const SinglePost: React.FC<ISinglePost> = (post) => {
         { post.body }
       </section>
       <section>
-        <label>{ post.countLikes }</label>
+        <label>{ likeCount }</label>
         <button onClick = { likeHandler }>Like</button>
-        <button>Comment</button>
+        <button onClick = { showHandler }>Comment</button>
       </section>
+      
+      <CommentComponent postId = { post._id } showData = { show } />
   </div>
   )
 }
