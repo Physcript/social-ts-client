@@ -8,28 +8,58 @@ export interface ISingleCommentComponent {
 const SingleCommentComponent: React.FC<ISingleCommentComponent> = (props) => {
   
   const [ comment,setComment ] = useState([])
-  
+  const [ size,setSize ] = useState<number>(0)
+  let [ skip, setSkip ] = useState<number>(0)
+  let [ showActive, setShowActive ] = useState<boolean>(true) 
+  let [ fm, setFm ] = useState<boolean>(true)
+
   const url = '/c/get'
   const method = 'POST'
-  const body = JSON.stringify({ postId: props.postId })
+  const body = JSON.stringify({ postId: props.postId, _limit: 3, _skip: skip })
 
   const _request = request({ url,method,body })
-  fetch(_request)
-    .then((val) =>{
-      
-      if(val.status === 200)
+  const showMoreHandler = (e: React.MouseEvent<HTMLLabelElement>) => {
+      e.preventDefault()
+      setFm(true)
+      if( size > skip)
         {
-          val.json().then((res) => {
-            setComment(res.message.comment)
-          })   
+          setSkip( skip += 2 )
         }
       else
         {
-          val.json().then((res) => {
-            console.log(res.message)
-          })
+          setSkip( skip -2 )
         }
-    })
+      return
+  }
+
+  useEffect(() => {
+    if( fm  )
+    {
+    fetch(_request)
+      .then((val) =>{
+        
+        if(val.status === 200)
+          {
+            val.json().then((res) => {
+              setComment(res.message.comment)
+              setSize(res.message.size)
+            })   
+          }
+        else
+          {
+            val.json().then((res) => {
+              console.log(res.message)
+            })
+          }
+      })
+      .finally(() => {
+        setFm(false) 
+      })
+    }
+
+    },[showMoreHandler])
+
+     
 
   return (
     <div>
@@ -45,6 +75,9 @@ const SingleCommentComponent: React.FC<ISingleCommentComponent> = (props) => {
             </div>
           )
         })
+      }
+      {
+        size > 3  ? (<label onClick = { showMoreHandler }>show more comment</label>) : (<div></div>)
       }
     </div>
   )

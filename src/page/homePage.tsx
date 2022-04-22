@@ -1,4 +1,4 @@
-import React,{ useContext,useState } from "react"
+import React,{ useContext,useEffect,useState } from "react"
 import AuthContext from '../context/auth/context'
 import CreatePostComponent from '../component/CreatePostComponent'
 import AllPostComponent from '../component/AllPostComponent'
@@ -15,6 +15,23 @@ const HomePage: React.FC<IHomePage> = (props) => {
 
   const navigate = useNavigate()
   const { _id,firstName,lastName,avatar,uid,email,createdAt,updatedAt, address }  = authContext.userState.USER
+  
+  useEffect(() => {
+    
+    socket.on('like-notif', (data) => {
+      const _postId = (data.data.postId)
+      const _uid = (data.data.uid)
+      const uid = authContext.userState.USER.uid
+
+      if(_uid == uid)
+        {
+          console.log('notify me')
+        }
+
+    })
+
+  },[])
+
   return (
     <div>
       Home

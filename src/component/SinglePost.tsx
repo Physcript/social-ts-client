@@ -1,8 +1,11 @@
 
-import React, { useState,useEffect } from 'react'
+import React, { useState,useContext,useEffect } from 'react'
+import AuthContext from '../context/auth/context'
 import request from '../module/request'
 import { useNavigate } from 'react-router-dom'
 import CommentComponent from './CommentComponent'
+import socket from '../module/socket'
+
 
 export interface ISinglePost {
   _id: string
@@ -18,6 +21,7 @@ export interface ISinglePost {
 }
 
 const SinglePost: React.FC<ISinglePost> = (post) => {
+  const userContext = useContext(AuthContext)
   const [ likeCount, setLikeCount ] = useState<number>(post.countLikes ?? 0)
   const [ show,setShow ] = useState<boolean>(false)
 
@@ -25,7 +29,13 @@ const SinglePost: React.FC<ISinglePost> = (post) => {
   const likeHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     
+    let socketData = {
+      postId: post._id ,
+      userUid: userContext.userState.USER.uid 
+    }
+
     const url = '/like/comment'
+
     const method = 'POST'
     const body = JSON.stringify({
       uid: post.userId,
@@ -39,6 +49,14 @@ const SinglePost: React.FC<ISinglePost> = (post) => {
           {
             val.json().then((res) => {
               setLikeCount(res.message.count)
+              if(res.message.data ? res.message.data : false) 
+                {
+                  const uid = post.uid
+                  const postId = post._id
+                 
+                  socket.emit('like-notif', { uid,postId })
+
+                }
             })
           }
         else
@@ -48,6 +66,8 @@ const SinglePost: React.FC<ISinglePost> = (post) => {
             })
           }
       })
+
+      // end of likehandler
   }
 
   const showHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -72,7 +92,7 @@ const SinglePost: React.FC<ISinglePost> = (post) => {
     <div style = {{ margin: '10px 0', padding: '5px', border: '1px solid black', width: '50%' }}>
       <section style = {{ display: 'flex' }}>
         <img src = { post.avatar } style = {{ width: '25px' }} />
-        <label onClick = { () => navigate(`/user/${post.uid}`) }><a href = '#'>{ post.firstName } { post.lastName }</a></label>
+        <label onClick = { () => navigate(`/user/${post.uid}`) }><a>{ post.firstName } { post.lastName }</a></label>
       </section>
       <section>
         { post.body }
