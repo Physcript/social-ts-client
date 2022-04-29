@@ -6,13 +6,13 @@ import request from '../module/request'
 import socket from '../module/socket'
 
 import { useNavigate } from 'react-router-dom'
+import NotifComponent from "../component/NotifComponent"
 export interface IHomePage {}
 
 const HomePage: React.FC<IHomePage> = (props) => {
   const authContext = useContext(AuthContext)
-  socket.emit('asd', { 'asd' : 's222'})
-  
-
+  const [ showModal, setShowModal ] = useState<boolean>(false)
+  const myUid = authContext.userState.USER.uid
   const navigate = useNavigate()
   const { _id,firstName,lastName,avatar,uid,email,createdAt,updatedAt, address }  = authContext.userState.USER
   
@@ -23,11 +23,11 @@ const HomePage: React.FC<IHomePage> = (props) => {
       const _uid = (data.data.uid)
       const uid = authContext.userState.USER.uid
 
-      if(_uid == uid)
+      if(_uid == uid && ( myUid !== _uid ))
         {
-          console.log('notify me')
+          setShowModal(true)
+          setTimeout(() =>{setShowModal(false)},3000)
         }
-
     })
 
   },[])
@@ -45,7 +45,8 @@ const HomePage: React.FC<IHomePage> = (props) => {
         email = { email }
       />
       <AllPostComponent />
-      </div>
+      <NotifComponent show = { showModal } />
+    </div>
 
   )
 
