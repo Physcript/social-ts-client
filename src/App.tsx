@@ -22,6 +22,7 @@ function App() {
   return (
     <AuthContextProvider value = { UserContextValue }>
     <BrowserRouter>
+      <div className = 'container'>
       <HeaderComponent />
       <Routes>
         {
@@ -46,6 +47,7 @@ function App() {
           })
         } 
       </Routes>
+      </div>
     </BrowserRouter>
     </AuthContextProvider>
   );

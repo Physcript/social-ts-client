@@ -42,12 +42,13 @@ const ProfilePage: React.FC<IProfilePage> = (props) => {
         val.json().then((res) => {
           if(res.message)
             {
-              setTextButton('Followed')
-            }
-          if(res.message === false)
-            {
               setTextButton('Follow')
             }
+          else
+            {
+              setTextButton('Unfollowed')
+            }
+          setFollowerCount(res.count)
         })
       })
 

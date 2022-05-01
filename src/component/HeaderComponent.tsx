@@ -54,10 +54,11 @@ const HeaderComponent: React.FC<IHeaderComponent> = (props) => {
 
   return (
     
-    <div className = 'contkainer'>
+    <div>
       <nav style = {{ 'display': 'flex', justifyContent: 'space-between' }}>
         <div>
           <label 
+            className = 'logo'
             onClick = { 
               () => navigate('/home')
             }
@@ -75,7 +76,6 @@ const HeaderComponent: React.FC<IHeaderComponent> = (props) => {
             :
               (
                 <div style = {{ display: 'flex','gap': '10px' }}>
-                  <label onClick = { registerHandler }>Register</label>
                   <label onClick = { loginHandler }>Login</label>
                 </div>
               )

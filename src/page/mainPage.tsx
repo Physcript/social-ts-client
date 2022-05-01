@@ -49,14 +49,18 @@ const MainPage = () => {
   },[])
 
   return (
-    <div style = {{ display: 'flex', flexDirection: 'column', width: '150px' }}>
-      Main page
-      <button
-        onClick = { () => navigate('/login') }
-      >Login</button>
-      <button
-        onClick = { () => navigate('/register') }
-      >Register</button>
+    <div className = 'main-hero'>
+      <div className = 'left'>
+        <img className = 'img' src = { require('./../assets/img/main_01.jpg') } />
+      </div>
+      <div className = 'right'>
+        <section style = {{ display:'flex',flexDirection:'column' }}>
+          <h1 className = 'sub-section'>Want to be famous?</h1>
+          <label className = 'sub-section-2'>Create account to become famouse for upcomming new social media trend right now</label>
+          <label>by clicking the button below</label>
+        </section>
+          <button className = 'button'>Register now</button>
+      </div>
     </div>
   )
 }
