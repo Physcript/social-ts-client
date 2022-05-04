@@ -89,7 +89,9 @@ const SinglePost: React.FC<ISinglePost> = (post) => {
   },[])
 
   return (
-    <div style = {{ margin: '10px 0', padding: '5px', border: '1px solid black', width: '50%' }}>
+    <div 
+      className = 'singlePost'
+    >
       <section style = {{ display: 'flex' }}>
         <img src = { post.avatar } style = {{ width: '25px' }} />
         <label onClick = { () => navigate(`/user/${post.uid}`) }><a>{ post.firstName } { post.lastName }</a></label>
@@ -97,10 +99,12 @@ const SinglePost: React.FC<ISinglePost> = (post) => {
       <section>
         { post.body }
       </section>
-      <section>
-        <label>{ likeCount }</label>
-        <button onClick = { likeHandler }>Like</button>
-        <button onClick = { showHandler }>Comment</button>
+      <section style = {{ marginTop: '10px' }}>
+        <label>{  }</label> 
+      </section>
+      <section className = 'likeCommentSection'>
+        <button onClick = { likeHandler } className = 'likeSection'>Like</button>
+        <button onClick = { showHandler } className = 'commentSection'>Comment</button>
       </section>
       
       <CommentComponent postId = { post._id } showData = { show } />

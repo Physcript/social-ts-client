@@ -70,7 +70,9 @@ const HeaderComponent: React.FC<IHeaderComponent> = (props) => {
               (
                 <div style = {{ 'display': 'flex', 'gap': '10px' }} >
                   <label onClick = { profileHandler }>{ userContext.userState.USER.firstName }</label>
-                  <button onClick = { logoutHandler } >Logout</button>
+                  <button onClick = { logoutHandler } 
+                    className = 'myButton2'
+                  >Logout</button>
                 </div>
               )
             :

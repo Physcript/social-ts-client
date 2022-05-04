@@ -42,7 +42,9 @@ const CreatePostComponent = (props: ICreatePostComponent) =>{
         onChange = { (e) => setUserInput(e.target.value) }
       />
       <section>
-        <button onClick = { postHandler } >Post</button>
+        <button 
+          className = 'myButton'
+          onClick = { postHandler } >Post</button>
       </section>
     </div>
   )

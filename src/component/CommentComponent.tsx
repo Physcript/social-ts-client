@@ -42,7 +42,6 @@ const CommentComponent: React.FC<ICommentComponent> = (props) => {
  
   return (
     <div>
-      <hr />
       { props.showData ? (
       <div>
         <div style = {{ paddingLeft: '20px',display: 'flex', gap: '5px' }}>

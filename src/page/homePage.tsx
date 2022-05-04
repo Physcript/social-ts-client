@@ -34,7 +34,6 @@ const HomePage: React.FC<IHomePage> = (props) => {
 
   return (
     <div className = 'container'>
-      Home
       <CreatePostComponent _id = { _id } firstName = { firstName } 
         lastName = { lastName }
         uid = { uid }

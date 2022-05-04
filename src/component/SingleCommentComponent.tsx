@@ -68,8 +68,8 @@ const SingleCommentComponent: React.FC<ISingleCommentComponent> = (props) => {
           return (
             <div className = 'boxes' key = {index} style = {{ display: 'flex',flexDirection: 'column' }}>
               <div>
-              <img src = { com.usr.avatar } style = {{ width: '25px' }} />
-              <label>{ com.usr.firstName } {com.usr.lastName}</label>
+                <img src = { com.usr.avatar } style = {{ width: '25px' }} />
+                <label>{ com.usr.firstName } {com.usr.lastName}</label>
               </div>
               <label style = {{ marginLeft: '25px' }}>{ com.body }</label>
             </div>
